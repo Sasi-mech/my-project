@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clubs - NITPY</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #001f3f, #003366); /* Dark gradient background */
+            margin: 0;
+            padding: 0;
+            color: #ffffff; /* White text */
+        }
+        header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Dark gradient for header */
+            color: #ffffff; /* White text */
+            padding: 40px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .club-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 20px; /* Space between cards */
+        }
+        .club-card {
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Dark gradient for cards */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .club-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .club-logo {
+            max-width: 150px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .club-name {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ffffff; /* White text */
+        }
+        .club-description {
+            font-size: 1rem;
+            color: #dddddd; /* Light gray text */
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .club-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #00CED1; /* Cyan button background */
+            color: #ffffff; /* White text */
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .club-link:hover {
+            background-color: #20B2AA; /* Darker cyan on hover */
+        }
+        footer {
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Dark gradient for footer */
+            color: #ffffff; /* White text */
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        footer p {
+            margin: 0;
+        }
+        /* Navigation bar styles */
+        .navbar {
+            background-color: #1e3c72; /* Dark blue color */
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #2a5298; /* Slightly lighter blue on hover */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/clubs">Clubs</a>
+        <a href="/events">Events</a>
+        <a href="/contact">Contact</a>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <h1>Clubs at NITPY</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Club List -->
+        <div class="club-list">
+            {% for club in all_clubs %}
+                <div class="club-card">
+                    <!-- Club Logo -->
+                    {% if club.logo %}
+                        <img src="{{ club.logo.url }}" alt="{{ club.name }} Logo" class="club-logo">
+                    {% else %}
+                        <p class="text-muted">No logo available.</p>
+                    {% endif %}
+
+                    <!-- Club Name -->
+                    <h2 class="club-name">{{ club.name }}</h2>
+
+                    <!-- Club Description -->
+                    <div class="club-description">
+                        {{ club.description|truncatewords:30 }}  <!-- Show a short preview of the description -->
+                    </div>
+
+                    <!-- Link to Club Detail Page -->
+                    <a href="{% url 'club_detail' club.id %}" class="club-link">Learn More</a>
+                </div>
+            {% empty %}
+                <p class="text-muted text-center">No clubs available.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 NITPY Clubs. All rights reserved.</p>
+    </footer>
+</body>
+</html>

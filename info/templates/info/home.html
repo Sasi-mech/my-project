@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NITPY Clubs</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Define color variables */
+        :root {
+            --navy-blue: #001f3f;       /* Navy Blue */
+            --white: #ffffff;           /* White */
+            --bright-cyan: #00ffff;     /* Bright Cyan */
+            --soft-gold: #FFD700;        /* Soft Gold */
+            --light-gray: #f0f0f0;      /* Light Gray */
+        }
+
+        /* General Styles */
+        body {
+            background: var(--white);   /* White background */
+            color: var(--navy-blue);    /* Navy blue text */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        header {
+            background: var(--navy-blue); /* Navy blue background */
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            height: 50px; /* Adjust based on your logo size */
+        }
+
+        header nav a {
+            color: var(--white);           /* White text */
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        header nav a:hover {
+            color: var(--bright-cyan);    /* Bright cyan on hover */
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: url('{% static 'info/images/hero-bg.jpg' %}') no-repeat center center/cover;
+            color: var(--white);           /* White text */
+            padding: 150px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+        }
+
+        .hero-section p {
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+        }
+
+        .hero-section .btn {
+            background: var(--bright-cyan); /* Bright cyan button */
+            color: var(--navy-blue);       /* Navy blue text */
+            font-size: 1.2rem;
+            padding: 10px 30px;
+            border-radius: 25px;
+            border: none;
+            transition: background 0.3s ease;
+        }
+
+        .hero-section .btn:hover {
+            background: var(--navy-blue);  /* Navy blue on hover */
+            color: var(--white);           /* White text */
+        }
+
+        /* About Section */
+        .about-section {
+            background: var(--white);      /* White background */
+            padding: 60px 0;
+        }
+
+        .about-section h2 {
+            color: var(--navy-blue);       /* Navy blue text */
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .about-section .mission {
+            background: var(--light-gray); /* Light gray background */
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .about-section .mission h3 {
+            color: var(--navy-blue);       /* Navy blue text */
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .about-section .mission p {
+            color: #555;                  /* Gray text */
+            font-size: 1.1rem;
+        }
+
+        .about-section .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .about-section .feature-card {
+            background: var(--white);      /* White background */
+            border: 1px solid var(--light-gray); /* Light gray border */
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            width: 30%;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .about-section .feature-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
+        }
+
+        .about-section .feature-card i {
+            font-size: 2rem;
+            color: var(--bright-cyan);     /* Bright cyan icon */
+            margin-bottom: 15px;
+        }
+
+        .about-section .feature-card h4 {
+            color: var(--navy-blue);       /* Navy blue text */
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .about-section .feature-card p {
+            color: #555;                   /* Gray text */
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy-blue);    /* Navy blue background */
+            color: var(--white);            /* White text */
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <!-- NITPY Logo with Link -->
+        <a href="https://www.nitpy.ac.in" target="_blank">
+            <img src="{% static 'info/images/nitpy_logo.png' %}" alt="NITPY Logo" class="logo">
+        </a>
+        <!-- Navigation -->
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'clubs' %}">Clubs</a>
+            <a href="{% url 'about' %}">About Us</a>
+            <a href="{% url 'services' %}">Services</a>
+            <a href="{% url 'contact' %}">Contact Us</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <h1>Welcome to NITPY Clubs</h1>
+            <p>Explore the vibrant and colorful world of clubs at NIT Puducherry.</p>
+            <a href="{% url 'clubs' %}" class="btn">Explore Clubs</a>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="about-section">
+        <div class="container">
+            <h2>About Us</h2>
+            <!-- Mission Statement -->
+            <div class="mission">
+                <h3>Our Mission</h3>
+                <p>To foster creativity, innovation, and collaboration among students through diverse clubs and activities at NIT Puducherry.</p>
+            </div>
+            <!-- Key Features -->
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h4>Diverse Clubs</h4>
+                    <p>Explore a wide range of clubs catering to various interests and passions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-trophy"></i>
+                    <h4>Achievements</h4>
+                    <p>Our clubs have won numerous awards and recognitions at national and international levels.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Collaboration</h4>
+                    <p>We encourage teamwork and collaboration among students from different disciplines.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 NIT Puducherry Clubs. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

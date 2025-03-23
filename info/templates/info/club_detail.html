@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ club.name }} - Club Detail</title>
+    <!-- Lightbox2 CSS -->
+    <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #001f3f, #003366); /* Dark gradient background */
+            margin: 0;
+            padding: 0;
+            color: #ffffff; /* White text */
+        }
+        header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Dark gradient for header */
+            color: #ffffff; /* White text */
+            padding: 40px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .club-logo {
+            max-width: 200px;
+            display: block;
+            margin: 0 auto 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .club-description {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #dddddd; /* Light gray text for description */
+            margin-bottom: 30px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid */
+            gap: 15px; /* Space between images */
+            margin-top: 20px;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+        }
+        footer {
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Dark gradient for footer */
+            color: #ffffff; /* White text */
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>{{ club.name }}</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Club Logo -->
+        {% if club.logo %}
+            <img src="{{ club.logo.url }}" alt="{{ club.name }} Logo" class="club-logo">
+        {% else %}
+            <p class="text-muted text-center">No logo available.</p>
+        {% endif %}
+
+        <!-- Club Description -->
+         {% load markdownify %}
+        <div class="club-description">
+            {{ club.description|markdownify }}  <!-- Preserve line breaks and formatting -->
+        </div>
+
+        <!-- Gallery Section -->
+        <h2 class="text-center">Gallery</h2>
+        <div class="gallery">
+            {% for image in club.club_images.all %}
+                <a href="{{ image.image.url }}" data-lightbox="club-gallery" data-title="{{ club.name }}">
+                    <img src="{{ image.image.url }}" alt="Gallery Image for {{ club.name }}">
+                </a>
+            {% empty %}
+                <p class="text-muted text-center">No images in the gallery.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 NITPY Clubs. All rights reserved.</p>
+    </footer>
+
+    <!-- Lightbox2 JavaScript -->
+    <script src="{% static 'js/lightbox.min.js' %}"></script>
+</body>
+</html>
